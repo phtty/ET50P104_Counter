@@ -113,10 +113,12 @@ Status_Pause:
 Status_Finish:
 	jsr		F_Des_Counter_Finish
 
-	bbr7	Timer_Flag,Blink_Out
+	bbs7	Timer_Flag,Blink_Out
+	bra		MainLoop
+Blink_Out:
 	rmb7	Timer_Flag
 	lda		CC1
-	cmp		#$08
+	cmp		#$07
 	beq		Blink_MS
 	inc		CC1
 	bra		MainLoop
@@ -127,14 +129,20 @@ Blink_MS:
 	rmb3	Frame_Flag
 	ldx		#lcd_MS
 	jsr		F_ClrpSymbol
-	bra		Blink_Out
+	bra		MainLoop
 Blink_DP:
 	smb3	Frame_Flag
 	ldx		#lcd_MS
 	jsr		F_DispSymbol
 
-Blink_Out:
-	bra		MainLoop
+	lda		#01001001B							; 设置响铃序列
+	sta		Beep_Serial
+	lda		#10B
+	sta		Beep_Serial+1
+
+	smb3	Timer_Flag							; 计时完成响铃标志位
+
+	jmp		MainLoop
 
 
 ;***********************************************************************

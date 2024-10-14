@@ -678,8 +678,6 @@ CHECK_LCD	MACRO
 	LDA		#$00
 	STA		P_PC_IO		
 	STA		P_PC
-;	STA		P_PC_IO_Backup
-;	STA		P_PC_Backup
 	ENDM	
 ;------------------------------------
 ;------------------------------------

@@ -7,7 +7,7 @@ F_Beep_Manage:
 	lda		Beep_Serial						; 响铃序列全为0则响铃结束
 	cmp		#$0
 	beq		L_Beep_Over
-	
+
 	bbr0	Beep_Serial,L_No_Beep			; 判断响铃序列第1位，为1就响，为0就不响
 	smb7	TMRC
 	clc

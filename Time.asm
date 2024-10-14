@@ -275,12 +275,6 @@ Beep_Start:
 	cmp		#29
 	beq		Finish_Time_Out
 
-	lda		#01001001B							; 设置响铃序列
-	sta		Beep_Serial
-	lda		#10B
-	sta		Beep_Serial+1
-
-	smb3	Timer_Flag							; 计时完成响铃标志位
 	rmb0	Timer_Flag							; 清1秒标志防止重复进入
 	inc		CC2
 	rts
@@ -299,5 +293,10 @@ Finish_Time_Out:
 	TMR2_OFF
 	lda		#00
 	sta		CC2
+	sta		Beep_Serial
+	sta		Beep_Serial+1
+
+	rmb3	Timer_Flag
+
 
 	rts

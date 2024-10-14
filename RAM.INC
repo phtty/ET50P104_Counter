@@ -65,8 +65,6 @@ Overflow_Flag			DS		1
 
 P_PA_IO_Backup      	DS	1	;B
 P_PA_Backup         	DS	1	;C
-P_PA_WAKE_Backup		DS	1	;D
-P_PC_IO_Backup      	DS	1	;E
 P_PC_Backup         	DS	1	;F
 ;---------------------------------------
 Time_Str_Addr	EQU		$
